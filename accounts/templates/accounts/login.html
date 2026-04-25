@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #5f5d61, #363434, #0b0b0b);
+      animation: bgMove 8s infinite alternate ease-in-out;
+    }
+
+    @keyframes bgMove {
+      0% { filter: hue-rotate(0deg); }
+      100% { filter: hue-rotate(30deg); }
+    }
+
+    .container {
+      width: 350px;
+      background: rgba(255,255,255,0.95);
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      animation: pop 0.6s ease;
+    }
+
+    @keyframes pop {
+      from {
+        transform: translateY(20px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+   .logo {
+  text-align: center;
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 25px;
+
+  display: inline-block;
+
+  background: linear-gradient(45deg, #313130, #696766, #646161, #2c2b2b, #303030);
+
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  -webkit-text-fill-color: transparent;
+
+  color: #473c43; /* fallback */
+}
+
+    input {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      transition: 0.3s;
+    }
+
+    input:focus {
+      border-color: #a3aca7;
+      box-shadow: 0 0 8px rgba(22, 103, 39, 0.4);
+      outline: none;
+      transform: scale(1.02);
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 15px;
+      border: none;
+      border-radius: 8px;
+      background: linear-gradient(45deg, #1a1919, #151515, #020202, #0f0e0e, #010101);
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    }
+
+    .error {
+      color: rgb(91, 89, 89);
+      font-size: 13px;
+      text-align: center;
+      margin-top: 5px;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 15px;
+      font-size: 13px;
+    }
+
+    .footer a {
+      color: #2c2a2b;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    @media (max-width: 420px) {
+      .container {
+        width: 90%;
+        padding: 25px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <div class="logo">Welcome</div>
+
+    <form method="POST">
+      <!-- Django CSRF -->
+      {% csrf_token %}
+
+      <input type="text" name="username" placeholder="Username" required />
+      <input type="password" name="password" placeholder="Password" required />
+
+      {% if error %}
+        <div class="error">{{ error }}</div>
+      {% endif %}
+
+      <button type="submit">Log In</button>
+    </form>
+
+    <div class="footer">
+      no have an account? <a href="/register/">Sign up</a>
+    </div>
+  </div>
+
+</body>
+</html>

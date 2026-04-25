@@ -1,0 +1,11 @@
+<form method="POST">
+    {% csrf_token %}
+    <h2>Verify Email</h2>
+
+    {% if error %}
+        <p style="color:red">{{ error }}</p>
+    {% endif %}
+
+    <input type="text" name="code" placeholder="Enter Code"><br>
+    <button type="submit">Verify</button>
+</form>
